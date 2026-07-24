@@ -3,16 +3,19 @@ import css from "./MovieGrid.module.css";
 
 interface MovieGridProps {
   movies: Movie[];
+  onOpenModal: (movie: Movie) => void;
 }
 
-export default function MovieGrid({ movies }: MovieGridProps) {
-  console.log(movies);
+export default function MovieGrid({ movies, onOpenModal }: MovieGridProps) {
+  function handleMovieCardClick(movie: Movie) {
+    onOpenModal(movie);
+  }
 
   return (
     <ul className={css.grid}>
       {movies.map((movie) => (
         <li key={movie.id}>
-          <div className={css.card}>
+          <div className={css.card} onClick={()=>{handleMovieCardClick(movie)}}>
             <img
               className={css.image}
               src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path}
