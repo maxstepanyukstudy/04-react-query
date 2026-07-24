@@ -11,7 +11,7 @@ export default function SearchBar({ onSubmit }: SearchBarProps) {
     const queryNorm = query.trim().toLowerCase();
 
     if (queryNorm.length < 1) {
-      toast("Please enter your search query.");
+      toast.error("Please enter your search query.");
       return;
     }
 
