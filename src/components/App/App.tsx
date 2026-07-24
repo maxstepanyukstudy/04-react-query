@@ -4,6 +4,8 @@ import type { Movie } from "../../types/movie";
 import SearchBar from "../SearchBar/SearchBar";
 import MovieGrid from "../MovieGrid/MovieGrid";
 import toast, { Toaster } from "react-hot-toast";
+import Loader from "../Loader/Loader";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 export default function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -13,7 +15,7 @@ export default function App() {
   function handleSeqrch(query: string) {
     const handleFetchMovies = async () => {
       try {
-
+        setMovies([]);
         setIsLoading(true);
         setIsError(false);
         const data = await fetchMovies(query);
@@ -21,7 +23,6 @@ export default function App() {
           toast("No movies found for your request.");
         }
         setMovies(data);
-
       } catch {
         setIsError(true);
       } finally {
@@ -35,9 +36,10 @@ export default function App() {
     <>
       <SearchBar onSubmit={handleSeqrch} />
 
-      <main>
-        <MovieGrid movies={movies} />
-      </main>
+      {isLoading && <Loader />}
+      {isError && <ErrorMessage />}
+
+      <main>{movies.length > 0 && <MovieGrid movies={movies} />}</main>
 
       <Toaster />
     </>
