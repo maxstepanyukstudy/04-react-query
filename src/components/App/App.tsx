@@ -15,7 +15,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  function handleSeqrch(query: string) {
+  function handleSearch(query: string) {
     const handleFetchMovies = async () => {
       try {
         setMovies([]);
@@ -41,7 +41,7 @@ export default function App() {
 
   return (
     <>
-      <SearchBar onSubmit={handleSeqrch} />
+      <SearchBar onSubmit={handleSearch} />
 
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
