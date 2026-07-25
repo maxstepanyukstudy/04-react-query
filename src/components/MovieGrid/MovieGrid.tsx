@@ -3,12 +3,12 @@ import css from "./MovieGrid.module.css";
 
 interface MovieGridProps {
   movies: Movie[];
-  onOpenModal: (movie: Movie) => void;
+  onSelect: (movie: Movie) => void;
 }
 
-export default function MovieGrid({ movies, onOpenModal }: MovieGridProps) {
+export default function MovieGrid({ movies, onSelect }: MovieGridProps) {
   function handleMovieCardClick(movie: Movie) {
-    onOpenModal(movie);
+    onSelect(movie);
   }
 
   return (

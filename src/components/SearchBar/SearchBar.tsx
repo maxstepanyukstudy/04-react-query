@@ -6,7 +6,7 @@ interface SearchBarProps {
 }
 
 export default function SearchBar({ onSubmit }: SearchBarProps) {
-  function hadleSubmit(formData: FormData) {
+  function handleSubmit(formData: FormData) {
     const query = formData.get("query") as string;
     const queryNorm = query.trim().toLowerCase();
 
@@ -29,7 +29,7 @@ export default function SearchBar({ onSubmit }: SearchBarProps) {
         >
           Powered by TMDB
         </a>
-        <form className={styles.form} action={hadleSubmit}>
+        <form className={styles.form} action={handleSubmit}>
           <input
             className={styles.input}
             type="text"

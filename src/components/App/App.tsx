@@ -55,7 +55,7 @@ export default function App() {
         />
       )}
 
-      <main>{movies.length > 0 && <MovieGrid movies={movies} onOpenModal={openModal} />}</main>
+      <main>{movies.length > 0 && <MovieGrid movies={movies} onSelect={openModal} />}</main>
 
       <Toaster />
     </>
