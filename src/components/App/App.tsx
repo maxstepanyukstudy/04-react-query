@@ -28,9 +28,9 @@ export default function App() {
   const [modalMovie, setModalMovie] = useState<Movie | null>(null);
 
   const { data, isLoading, isError, isSuccess } = useQuery({
-    queryKey: ["movies", searchQuery, currentPage], //todo: currentPage
+    queryKey: ["movies", searchQuery, currentPage],
     queryFn: () => {
-      return fetchMovies(searchQuery, currentPage); //todo: currentPage
+      return fetchMovies(searchQuery, currentPage);
     },
     enabled: searchQuery !== "",
     placeholderData: keepPreviousData,
@@ -43,7 +43,7 @@ export default function App() {
   }, [data, isSuccess]);
 
   function handleSearch(query: string) {
-    setSearchQuery(query); //todo: move to <SearchBar onSubmit={setQuery} />
+    setSearchQuery(query);
   }
 
   function openModal(movie: Movie) {
