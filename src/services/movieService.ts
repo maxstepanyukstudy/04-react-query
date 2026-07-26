@@ -17,13 +17,16 @@ const moviesApi = axios.create({
   },
 });
 
-export async function fetchMovies(query: string): Promise<Movie[]> {
+export async function fetchMovies(
+  query: string,
+  page: number,
+): Promise<GetMoviesResponse> {
   const { data } = await moviesApi.get<GetMoviesResponse>("/3/search/movie", {
     params: {
       query,
+      page,
       include_adult: false,
     },
   });
-  const movies = data.results;
-  return movies;
+  return data;
 }
