@@ -9,6 +9,19 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import MovieModal from "../MovieModal/MovieModal";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
+import css from "./App.module.css";
+
+// react-paginate setup
+import type { ReactPaginateProps } from "react-paginate";
+import type { ComponentType } from "react";
+import ReactPaginateModule from "react-paginate";
+type ModuleWithDefault<T> = { default: T };
+const ReactPaginate = (
+  ReactPaginateModule as unknown as ModuleWithDefault<
+    ComponentType<ReactPaginateProps>
+  >
+).default;
+
 export default function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
@@ -55,7 +68,25 @@ export default function App() {
 
       <main>
         {data && data.results && data.results.length > 0 && (
-          <MovieGrid movies={data.results} onSelect={openModal} />
+          <>
+            {data.total_pages > 1 && (
+              <ReactPaginate
+                pageCount={data.total_pages}
+                pageRangeDisplayed={5}
+                marginPagesDisplayed={1}
+                onPageChange={({ selected: selectedPaginationIndex }) => {
+                  setCurrentPage(selectedPaginationIndex + 1);
+                }}
+                forcePage={currentPage - 1}
+                containerClassName={css.pagination}
+                activeClassName={css.active}
+                nextLabel="→"
+                previousLabel="←"
+              />
+            )}
+
+            <MovieGrid movies={data.results} onSelect={openModal} />
+          </>
         )}
       </main>
 
