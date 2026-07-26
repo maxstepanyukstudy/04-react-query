@@ -44,6 +44,7 @@ export default function App() {
 
   function handleSearch(query: string) {
     setSearchQuery(query);
+    setCurrentPage(1);
   }
 
   function openModal(movie: Movie) {
